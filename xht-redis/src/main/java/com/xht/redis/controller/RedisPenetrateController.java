@@ -1,6 +1,8 @@
 package com.xht.redis.controller;
 
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.Redisson;
 import org.redisson.api.RBloomFilter;
@@ -19,6 +21,7 @@ import java.util.concurrent.TimeUnit;
 @RestController
 @RequestMapping("/penetrate")
 @Slf4j
+@Tag(name = "缓存穿透")
 public class RedisPenetrateController {
 
     @Autowired
@@ -28,6 +31,7 @@ public class RedisPenetrateController {
     Redisson redisson;
 
     @GetMapping("/null")
+    @Operation(summary = "设置null")
     public String byNull(){
         //1.查缓存
         log.info("1.查缓存");
@@ -48,6 +52,7 @@ public class RedisPenetrateController {
      * @return
      */
     @GetMapping("/bloom/{id}")
+    @Operation(summary = "布隆过滤器")
     public String byBloom(@PathVariable String id){
 
         //布隆过滤器
