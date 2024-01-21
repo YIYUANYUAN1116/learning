@@ -10,13 +10,14 @@ import org.springframework.data.redis.core.Cursor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ScanOptions;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 @SpringBootTest
 @Slf4j
-class HxtRedisApplicationTests {
+class XhtRedisApplicationTests {
 
 	@Test
 	void contextLoads() {

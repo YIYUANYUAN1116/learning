@@ -10,10 +10,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 @EnableKnife4j
 @ComponentScan(value = "com.xht")
-public class HxtRedisApplication {
+public class XhtRedisApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(HxtRedisApplication.class, args);
+		SpringApplication.run(XhtRedisApplication.class, args);
 	}
 
 }

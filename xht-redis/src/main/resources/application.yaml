@@ -12,7 +12,7 @@ spring:
           max-idle: 8
           min-idle: 0
 server:
-  port: 8088
+  port: 8093
 knife4j:
   basic:
     enable: true
