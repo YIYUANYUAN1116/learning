@@ -16,3 +16,6 @@ server:
 knife4j:
   basic:
     enable: true
+xht:
+  name: xht
+  passwd: yzd12345

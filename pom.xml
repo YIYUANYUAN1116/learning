@@ -20,7 +20,6 @@
         <module>xht-common</module>
         <module>xht-redis</module>
         <module>xht-rabbitmq</module>
-        <module>xht-mybatis</module>
         <module>xht-es</module>
     </modules>
 

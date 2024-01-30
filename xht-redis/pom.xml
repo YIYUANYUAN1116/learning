@@ -24,6 +24,12 @@
 	<dependencies>
 
 		<dependency>
+			<groupId>com.xht.starter</groupId>
+			<artifactId>xht-spring-starter</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
 			<groupId>com.xht.common</groupId>
 			<artifactId>xht-common</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
