@@ -10,11 +10,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class MyUserDetailsService implements UserDetailsService {
+public class XhtUserDetailsService implements UserDetailsService {
 
     @Autowired
     UserService userService;
@@ -26,6 +25,6 @@ public class MyUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException(username + " can not found !");
         }
         List<GrantedAuthority> admin = AuthorityUtils.createAuthorityList("admin");
-        return new MyUserDetails(user.getUsername(), user.getPassword(), admin);
+        return new XhtUserDetails(user.getUsername(), user.getPassword(), admin);
     }
 }

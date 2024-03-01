@@ -1,8 +1,6 @@
 package com.xht.security.custom;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.Assert;
@@ -11,7 +9,7 @@ import java.io.Serializable;
 import java.util.*;
 
 @Data
-public class MyUserDetails implements UserDetails {
+public class XhtUserDetails implements UserDetails {
     private String password;
     private final String username;
     private final Set<GrantedAuthority> authorities;
@@ -20,11 +18,11 @@ public class MyUserDetails implements UserDetails {
     private final boolean credentialsNonExpired;
     private final boolean enabled;
 
-    public MyUserDetails(String username,String password,List<GrantedAuthority> authorities){
+    public XhtUserDetails(String username, String password, List<GrantedAuthority> authorities){
         this(username, password, authorities,true, true, true, true);
     }
 
-    public MyUserDetails(String username, String password, List<GrantedAuthority> authorities, boolean accountNonExpired, boolean accountNonLocked, boolean credentialsNonExpired, boolean enabled) {
+    public XhtUserDetails(String username, String password, List<GrantedAuthority> authorities, boolean accountNonExpired, boolean accountNonLocked, boolean credentialsNonExpired, boolean enabled) {
         this.password = password;
         this.username = username;
         this.accountNonExpired = accountNonExpired;
@@ -36,7 +34,7 @@ public class MyUserDetails implements UserDetails {
 
     private static SortedSet<GrantedAuthority> sortAuthorities(Collection<? extends GrantedAuthority> authorities) {
         Assert.notNull(authorities, "Cannot pass a null GrantedAuthority collection");
-        SortedSet<GrantedAuthority> sortedAuthorities = new TreeSet(new MyUserDetails.AuthorityComparator());
+        SortedSet<GrantedAuthority> sortedAuthorities = new TreeSet(new XhtUserDetails.AuthorityComparator());
         for (GrantedAuthority grantedAuthority : authorities) {
             Assert.notNull(grantedAuthority, "GrantedAuthority list cannot contain any null elements");
             sortedAuthorities.add(grantedAuthority);
