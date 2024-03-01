@@ -21,6 +21,7 @@
         <module>xht-redis</module>
         <module>xht-rabbitmq</module>
         <module>xht-es</module>
+        <module>xht-security</module>
     </modules>
 
     <properties>
@@ -28,6 +29,9 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <mybatis.version>3.0.3</mybatis.version>
+        <mybatis-plus.version>3.5.5</mybatis-plus.version>
+        <mysql.version>8.0.33</mysql.version>
     </properties>
 
     <dependencies>
