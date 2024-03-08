@@ -1,0 +1,14 @@
+server:
+  port: 8095
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/kettle?characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: yzd2021
+
+kettleConfig:
+  filepath: D:\Development\Tool\Kettle\file\upload
+  pluginpath: D:\Development\Tool\Kettle\pdi-ce-9.4.0.0-343\data-integration\plugins
+
