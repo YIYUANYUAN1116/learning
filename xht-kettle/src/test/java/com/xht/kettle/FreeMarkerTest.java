@@ -1,5 +1,6 @@
 package com.xht.kettle;
 
+import com.alibaba.fastjson.JSON;
 import com.google.gson.Gson;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -26,6 +27,14 @@ public class FreeMarkerTest {
         }else {
             log.info("不存在");
         }
+    }
+
+    @Test
+    public void test3(){
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        arrayList.add(1);
+        arrayList.add(2);
+        System.out.println(JSON.toJSON(arrayList));
     }
 
     @Test

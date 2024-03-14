@@ -12,3 +12,11 @@ kettleConfig:
   filepath: D:\Development\Tool\Kettle\file\upload
   pluginpath: D:\Development\Tool\Kettle\pdi-ce-9.4.0.0-343\data-integration\plugins
 
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*/*.xml
+  global-config:
+    db-config:
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+      id-type: auto
