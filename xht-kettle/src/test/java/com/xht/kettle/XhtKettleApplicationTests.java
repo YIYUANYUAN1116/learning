@@ -3,19 +3,54 @@ package com.xht.kettle;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.xht.kettle.entity.Student;
+import com.xht.kettle.service.KettleService;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @SpringBootTest
 class XhtKettleApplicationTests {
+
+    @Autowired
+    private KettleService kettleService;
 
     @Test
     void contextLoads() {
     }
 
+
+    @Test
+    public void test1(){
+        String fileName = "D:\\Development\\Tool\\Kettle\\file\\param.ktr";
+        Map<String, String> map = new HashMap<>();
+
+        map.put("key1","value1");
+        map.put("key2","value2");
+        map.put("key3","value3");
+        map.put("key4","value4");
+
+        boolean runTaskKtr = kettleService.runTaskKtr(fileName, map);
+        System.out.println(runTaskKtr?"成功":"失败");
+    }
+
+    @Test
+    public void test3(){
+        String fileName = "D:\\Development\\Tool\\Kettle\\file\\transXMLDemo.ktr";
+
+        Map<String, String> map = new HashMap<>();
+
+        map.put("inputFilePath","D:\\Development\\Tool\\Kettle\\xmldemo.xml");
+        map.put("outputFilePath","D:/Development/Tool/Kettle/file/123test123");
+
+
+        boolean runTaskKtr = kettleService.runTaskKtr(fileName, map);
+        System.out.println(runTaskKtr?"成功":"失败");
+    }
 
     @Test
     public void test2(){

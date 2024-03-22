@@ -39,6 +39,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -124,8 +125,9 @@ public class KettleController {
     }
 
     @PostMapping("/upload")
-    public R uploadFile(@RequestParam("file") MultipartFile file){
+    public R uploadFile(MultipartFile file){
         KettleFile kettleFile = new KettleFile();
+        new KettleFile();
         if (file == null){
             return R.build(null,999,"请选择一个文件上传");
         }
@@ -424,5 +426,11 @@ public class KettleController {
 
         }
         return R.build(kettleFilePage,ResultCodeEnum.SUCCESS);
+    }
+
+    @PostMapping("/execute")
+    public R executeByParam(@RequestParam("fileName") String fileName,@RequestBody Map<String,String> params){
+        kettleService.runTaskKtr(fileName,params);
+        return R.build(ResultCodeEnum.SUCCESS);
     }
 }
