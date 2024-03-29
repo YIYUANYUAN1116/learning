@@ -17,6 +17,8 @@ class XhtAiApplicationTests {
     @Autowired
     private OllamaChatClient ollamaChatClient;
 
+
+
     @Test
     void contextLoads() {
         String message = "写一个java 版的 hello world";
