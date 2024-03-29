@@ -22,6 +22,8 @@
         <module>xht-rabbitmq</module>
         <module>xht-es</module>
         <module>xht-security</module>
+        <module>xht-reactor</module>
+        <module>xht-ai</module>
     </modules>
 
     <properties>

@@ -347,7 +347,7 @@ public class KettleController {
     @PostMapping("/delete/batch")
     @Operation(summary = "批量删除")
     @Transactional
-    public R delete(@RequestBody ArrayList<Integer> idList){
+    public R delete(@RequestBody List<Integer> idList){
         for (Integer id : idList) {
             KettleFile kettleFile = kettleFileService.getById(id);
             if (kettleFile != null){
