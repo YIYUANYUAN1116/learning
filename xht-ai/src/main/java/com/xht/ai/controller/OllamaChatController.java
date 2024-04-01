@@ -4,6 +4,7 @@ package com.xht.ai.controller;
 import com.xht.ai.entity.ChatMessageEntity;
 import com.xht.common.vo.Result;
 import com.xht.common.vo.ResultCodeEnum;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.ChatResponse;
 import org.springframework.ai.chat.messages.UserMessage;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
+
+import java.io.IOException;
 
 @RequestMapping("/ollama/chat")
 @RestController
@@ -34,12 +37,12 @@ public class OllamaChatController {
     }
 
     @PostMapping("/stream/input")
-    public Flux<ChatResponse> streamChat(@RequestBody ChatMessageEntity chatMessageEntity){
+    public Flux<ChatResponse> streamChat(HttpServletResponse response, @RequestBody ChatMessageEntity chatMessageEntity){
         log.info("streamChat--start");
         Prompt prompt = new Prompt(new UserMessage(chatMessageEntity.getMessage()));
         log.info("streamChat--end");
-        return  chatClient.stream(prompt);
-    }
+        return chatClient.stream(prompt);
 
+    }
 
 }

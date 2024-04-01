@@ -37,11 +37,11 @@ class XhtAiApplicationTests {
         Prompt prompt = promptTemplate.create(Map.of("message", msg));
 
         ollamaChatClient.stream(prompt).subscribe(chatResponse -> {
-            System.out.println(chatResponse.getResult().getOutput().getContent());
+            System.out.print(chatResponse.getResult().getOutput().getContent());
         },throwable -> {
             System.out.println("err:   "+throwable.getMessage());
         },()->{
-            System.out.println("complete~!");
+            System.out.print("complete~!");
             // 关闭函数
             future.complete(null);
         });
