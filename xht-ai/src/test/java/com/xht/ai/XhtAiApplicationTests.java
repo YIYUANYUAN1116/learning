@@ -1,5 +1,6 @@
 package com.xht.ai;
 
+import com.alibaba.fastjson.JSON;
 import org.junit.jupiter.api.Test;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.chat.prompt.PromptTemplate;
@@ -47,6 +48,18 @@ class XhtAiApplicationTests {
         });
 
         future.get();
+    }
+
+    @Test
+    public void test2(){
+        int num = 5;
+        String str = "hahahabc";
+        String jsonString = JSON.toJSONString(num);
+
+        System.out.println(jsonString);
+
+        String jsonString2 = JSON.toJSONString(str);
+        System.out.println(jsonString2);
     }
 
 }

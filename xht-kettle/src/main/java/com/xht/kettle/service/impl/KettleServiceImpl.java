@@ -7,6 +7,10 @@ import org.pentaho.di.core.Result;
 import org.pentaho.di.core.ResultFile;
 import org.pentaho.di.core.RowMetaAndData;
 import org.pentaho.di.core.exception.KettleException;
+import org.pentaho.di.core.logging.KettleLogLayout;
+import org.pentaho.di.core.logging.KettleLogStore;
+import org.pentaho.di.core.logging.KettleLoggingEvent;
+import org.pentaho.di.core.logging.LoggingBuffer;
 import org.pentaho.di.core.plugins.PluginFolder;
 import org.pentaho.di.core.plugins.StepPluginType;
 import org.pentaho.di.job.Job;
@@ -60,9 +64,23 @@ public class KettleServiceImpl implements KettleService {
 
             trans.waitUntilFinished();
 
-            Result result1 = trans.getResult();
-            List<RowMetaAndData> resultRows = trans.getResultRows();
-            List<ResultFile> resultFiles = trans.getResultFiles();
+            //        DatabaseMeta databaseMeta = new DatabaseMeta();
+//        databaseMeta.setName("连接名");
+//
+//        databaseMeta.setDatabaseType("ORACLE");
+//        databaseMeta.setAccessType(DatabaseMeta.TYPE_ACCESS_NATIVE);
+//        databaseMeta.setHostname("数据库IP");
+//        databaseMeta.setDBName("orcl");
+//        databaseMeta.setDBPort("数据库端口");
+//        databaseMeta.setUsername("用户名");
+//        databaseMeta.setPassword("密码");
+//        transMeta.addDatabase(databaseMeta);
+
+            String logChannelId = trans.getLogChannelId();
+            LoggingBuffer appender = KettleLogStore.getAppender();
+            String logText = appender.getBuffer(logChannelId, true).toString();
+            System.out.println("记录日志：" + logText);
+
             result = trans.getResult();
 
         } catch (Exception e) {

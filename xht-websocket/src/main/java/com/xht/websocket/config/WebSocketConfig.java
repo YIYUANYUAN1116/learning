@@ -1,6 +1,6 @@
-package com.xht.ai.config;
+package com.xht.websocket.config;
 
-import com.xht.ai.component.AiChatChannel;
+import com.xht.websocket.component.EchoChannel;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.server.standard.ServerEndpointExporter;
@@ -11,7 +11,7 @@ public class WebSocketConfig {
     @Bean
     public ServerEndpointExporter serverEndpointExporter(){
         ServerEndpointExporter serverEndpointExporter = new ServerEndpointExporter();
-        serverEndpointExporter.setAnnotatedEndpointClasses(AiChatChannel.class);
+        serverEndpointExporter.setAnnotatedEndpointClasses(EchoChannel.class);
 
         return serverEndpointExporter;
     }

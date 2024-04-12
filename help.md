@@ -18,3 +18,5 @@
 # [xht-ai](xht-ai) 8096
 
 # [xht-reactor](xht-reactor) 8097
+
+# [xht-websocket](xht-websocket) 8098

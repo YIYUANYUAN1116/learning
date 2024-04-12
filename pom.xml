@@ -24,6 +24,7 @@
         <module>xht-security</module>
         <module>xht-reactor</module>
         <module>xht-ai</module>
+        <module>xht-websocket</module>
     </modules>
 
     <properties>
