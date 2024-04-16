@@ -8,4 +8,5 @@ spring:
     ollama:
       base-url: http://localhost:11434
       chat:
-        model: gemma:2b
+        model: llama2:13b
+#        model: gemma:2b
