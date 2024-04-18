@@ -9,35 +9,36 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.xht.common</groupId>
-    <artifactId>xht-common</artifactId>
+    <groupId>com.xht.activiti8</groupId>
+    <artifactId>xht-activiti8</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
     <dependencies>
         <dependency>
-            <groupId>com.github.xiaoymin</groupId>
-            <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
-            <version>4.4.0</version>
+            <groupId>com.xht.common</groupId>
+            <artifactId>xht-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/com.baomidou/mybatis-plus-boot-starter -->
+        <!--整合activiti-->
         <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>${mybatis-plus.version}</version>
-        </dependency>
-
-        <!-- mysql 驱动 -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>${mysql.version}</version>
+            <groupId>org.activiti</groupId>
+            <artifactId>activiti-spring-boot-starter</artifactId>
+            <version>8.1.0</version>
         </dependency>
 
     </dependencies>
+
+    <repositories>
+        <repository>
+            <id>activiti-releases</id>
+            <url>https://artifacts.alfresco.com/nexus/content/repositories/activiti-releases</url>
+        </repository>
+    </repositories>
 
 </project>

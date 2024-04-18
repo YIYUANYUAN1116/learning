@@ -25,6 +25,7 @@
         <module>xht-reactor</module>
         <module>xht-ai</module>
         <module>xht-websocket</module>
+        <module>xht-activiti8</module>
     </modules>
 
     <properties>

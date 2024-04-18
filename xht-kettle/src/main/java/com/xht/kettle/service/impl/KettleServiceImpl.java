@@ -80,7 +80,7 @@ public class KettleServiceImpl implements KettleService {
             LoggingBuffer appender = KettleLogStore.getAppender();
             String logText = appender.getBuffer(logChannelId, true).toString();
             System.out.println("记录日志：" + logText);
-
+            long batchId = trans.getBatchId();
             result = trans.getResult();
 
         } catch (Exception e) {

@@ -39,4 +39,12 @@ public class Result<T> {
     public static <T> Result build(ResultCodeEnum resultCodeEnum) {
         return build(null , resultCodeEnum.getCode() , resultCodeEnum.getMessage()) ;
     }
+
+    public static <T> Result buildSuccess(T data) {
+        return build(data , ResultCodeEnum.SUCCESS) ;
+    }
+
+    public static <T> Result buildSuccess() {
+        return build(null, ResultCodeEnum.SUCCESS) ;
+    }
 }
