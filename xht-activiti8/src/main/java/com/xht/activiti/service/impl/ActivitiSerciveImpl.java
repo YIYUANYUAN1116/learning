@@ -48,6 +48,31 @@ public class ActivitiSerciveImpl implements ActivitiSercive {
         }
     }
 
+    @Override
+    public void actOrSusProcessDefinition(String proDefKey, String type) {
+        List<ProcessDefinition> list = repositoryService.createProcessDefinitionQuery()
+                .processDefinitionKey(proDefKey).list();
+        for (ProcessDefinition processDefinition : list) {
+            if (processDefinition.isSuspended()&&type.equals(WFOperationConst.ACTIVATE)){
+                repositoryService.activateProcessDefinitionById(processDefinition.getId());
+            } else if (!processDefinition.isSuspended()&&type.equals(WFOperationConst.SUSPEND)) {
+                repositoryService.suspendProcessDefinitionById(processDefinition.getId());
+            }
+        }
+    }
+
+    @Override
+    public void actOrSusProcessInstance(String proInsId, String activate) {
+        List<ProcessInstance> list = runtimeService.createProcessInstanceQuery().processInstanceId(proInsId).list();
+        for (ProcessInstance processInstance : list) {
+            if (processInstance.isSuspended() && activate.equals(WFOperationConst.ACTIVATE)){
+                runtimeService.activateProcessInstanceById(processInstance.getId());
+            }else if (processInstance.isSuspended() && activate.equals(WFOperationConst.SUSPEND)){
+                runtimeService.suspendProcessInstanceById(processInstance.getId());
+            }
+        }
+    }
+
     private void rollBackTask(String taskID) {
         //取得当前任务
         HistoricTaskInstance historicTaskInstance = historyService.createHistoricTaskInstanceQuery().taskId(taskID).singleResult();

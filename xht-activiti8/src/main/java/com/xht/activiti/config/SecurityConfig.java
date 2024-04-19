@@ -26,9 +26,9 @@ public class SecurityConfig {
                 {"小河豚", "password", "ROLE_ACTIVITI_USER", "GROUP_activitiTeam"},
                 {"我是ceo", "password", "ROLE_ACTIVITI_USER", "GROUP_activitiTeam"},
                 {"我是hr", "password", "ROLE_ACTIVITI_USER", "GROUP_activitiTeam"},
-                {"other", "password", "ROLE_ACTIVITI_USER", "GROUP_otherTeam"},
-                {"system", "password", "ROLE_ACTIVITI_USER"},
-                {"admin", "password", "ROLE_ACTIVITI_ADMIN"},
+                {"1", "password", "ROLE_ACTIVITI_USER", "GROUP_otherTeam"},
+                {"2", "password", "ROLE_ACTIVITI_USER"},
+                {"3", "password", "ROLE_ACTIVITI_ADMIN"},
         };
 
         for (String[] user : usersGroupsAndRoles) {

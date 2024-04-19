@@ -10,4 +10,8 @@ public interface ActivitiSercive {
 
 
     void handleTask(String taskID, String action);
+
+    void actOrSusProcessDefinition(String proDefKey, String type);
+
+    void actOrSusProcessInstance(String proInsId, String activate);
 }

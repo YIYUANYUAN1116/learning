@@ -21,4 +21,8 @@ public class WFOperationConst {
      */
     public static final String ROLLBACK = "rollback";
 
+    public static final String ACTIVATE = "activate";
+
+    public static final String SUSPEND = "suspend";
+
 }

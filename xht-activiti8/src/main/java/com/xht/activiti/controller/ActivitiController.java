@@ -1,37 +1,41 @@
 package com.xht.activiti.controller;
 
 
+import com.xht.activiti.cons.WFOperationConst;
 import com.xht.activiti.service.ActivitiSercive;
+import com.xht.activiti.service.DynamicJumpCmdService;
 import com.xht.common.vo.Result;
 import com.xht.common.vo.ResultCodeEnum;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
-import org.activiti.engine.HistoryService;
-import org.activiti.engine.RepositoryService;
-import org.activiti.engine.RuntimeService;
-import org.activiti.engine.TaskService;
+import org.activiti.bpmn.model.BpmnModel;
+import org.activiti.bpmn.model.FlowElement;
+import org.activiti.bpmn.model.Process;
+import org.activiti.engine.*;
 import org.activiti.engine.history.HistoricActivityInstance;
 import org.activiti.engine.history.HistoricProcessInstance;
 import org.activiti.engine.history.HistoricProcessInstanceQuery;
 import org.activiti.engine.history.HistoricTaskInstance;
-import org.activiti.engine.repository.Deployment;
-import org.activiti.engine.repository.DeploymentBuilder;
-import org.activiti.engine.repository.ProcessDefinition;
-import org.activiti.engine.repository.ProcessDefinitionQuery;
+import org.activiti.engine.impl.interceptor.CommandContext;
+import org.activiti.engine.impl.persistence.entity.ExecutionEntity;
+import org.activiti.engine.impl.persistence.entity.ExecutionEntityManager;
+import org.activiti.engine.repository.*;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Comment;
 import org.activiti.engine.task.Task;
 import org.activiti.engine.task.TaskQuery;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.io.InputStream;
+import java.util.*;
+import java.util.stream.Collectors;
 import java.util.zip.ZipInputStream;
 
 @RestController
@@ -55,6 +59,11 @@ public class ActivitiController {
     @Autowired
     ActivitiSercive activitiSercive;
 
+    @Autowired
+    ProcessEngine processEngine;
+
+    @Autowired
+    DynamicJumpCmdService dynamicJumpCmdService;
 
 
 
@@ -143,11 +152,115 @@ public class ActivitiController {
     public Result handleTask(
             @RequestParam("taskID") String taskID,@RequestParam("action") String action
     ){
-
+        //todo
         activitiSercive.handleTask(taskID,action);
 
         return Result.buildSuccess();
     }
 
 
+    @Operation(summary ="挂起该流程的所有流程实例")
+    @GetMapping("suspendProcessDefinition")
+    public Result suspendProcessDefinition(@RequestParam("ProDefKey") String ProDefKey){
+        activitiSercive.actOrSusProcessDefinition(ProDefKey, WFOperationConst.SUSPEND);
+        return Result.buildSuccess();
+    }
+
+    @Operation(summary ="激活该流程的所有流程实例")
+    @GetMapping("activateProcessDefinition")
+    public Result activateProcessDefinition(@RequestParam("ProDefKey") String ProDefKey){
+        activitiSercive.actOrSusProcessDefinition(ProDefKey, WFOperationConst.ACTIVATE);
+        return Result.buildSuccess();
+    }
+
+    @Operation(summary ="激活某个流程实例")
+    @GetMapping("activateProcessInstance")
+    public Result activateSingleProcessInstance(@RequestParam("ProInsId") String proInsId){
+        activitiSercive.actOrSusProcessInstance(proInsId,WFOperationConst.ACTIVATE);
+        return Result.buildSuccess();
+    }
+
+    @Operation(summary ="挂起某个流程实例")
+    @GetMapping("suspendProcessInstance")
+    public Result suspendSingleProcessInstance(@RequestParam("ProProInsIdDefKey") String proInsId){
+        activitiSercive.actOrSusProcessInstance(proInsId,WFOperationConst.SUSPEND);
+        return Result.buildSuccess();
+    }
+
+
+    @Operation(summary ="查询流程所有节点")
+    @GetMapping("getProcessInstancePoint")
+    public Result getProcessInstancePoint(@RequestParam("ProProInsId") String proInsId){
+        //流程定义id
+        String processDefinitionId = runtimeService.createProcessInstanceQuery()
+                .processInstanceId(proInsId).singleResult().getProcessDefinitionId();
+        BpmnModel bpmnModel = repositoryService.getBpmnModel(processDefinitionId);
+        Process process = bpmnModel.getProcesses().get(0);
+        //获取所有节点
+        Collection<FlowElement> flowElements = process.getFlowElements();
+        List<String> collect = flowElements.stream().filter(item->item.getName()!=null).map(FlowElement::getId).toList();
+        return Result.buildSuccess(collect);
+    }
+
+    @Operation(summary ="查询流程所处节点")
+    @GetMapping("getProcessInstanceCurPoint")
+    public Result getProcessInstanceCurPoint(@RequestParam("ProProInsId") String proInsId){
+        List<Task> list = taskService.createTaskQuery().processInstanceId(proInsId).list();
+        return Result.buildSuccess(list.toString());
+    }
+
+    @Operation(summary ="跳转节点")
+    @GetMapping("jumpTask")
+    public Result jumpTask(@RequestParam("ProProInsId") String proInsId
+            ,@RequestParam("from") String from,@RequestParam("to") String to){
+        dynamicJumpCmdService.jumpTask(proInsId,from,to);
+        return Result.buildSuccess();
+    }
+
+    @Operation(summary = "查看流程图")
+    @GetMapping("viewPng")
+    public ResponseEntity<InputStreamResource> viewPng(@RequestParam("procDefId") String procDefId){
+        InputStream diagramStream = null;
+        InputStreamResource inputStreamResource = null;
+        try {
+            ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery().processDefinitionId(procDefId).singleResult();
+            String diagramResourceName = processDefinition.getDiagramResourceName();
+            if (diagramResourceName != null && diagramResourceName.endsWith(".png")){
+                diagramStream = repositoryService.getResourceAsStream(
+                        processDefinition.getDeploymentId(),
+                        diagramResourceName);
+
+
+                inputStreamResource = new InputStreamResource(diagramStream);
+                return ResponseEntity.ok()
+                        .contentType(MediaType.IMAGE_PNG)
+                        .body(inputStreamResource);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (diagramStream!=null){
+                try {
+                    diagramStream.close();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+
+        return ResponseEntity.notFound().build();
+    }
+
+    @Operation(summary ="删除部署")
+    @GetMapping("/deploy/delete")
+    public Result deleteDeploy(@RequestParam("depId") String depId){
+        List<ProcessDefinition> list = repositoryService.createProcessDefinitionQuery().deploymentId(depId).list();
+        boolean b = list.stream().anyMatch(item -> taskService.createTaskQuery().processInstanceId(item.getId()) != null);
+        if (b){
+            return Result.buildSuccess("该部署存在 正在进行的任务实例");
+        }else {
+            repositoryService.deleteDeployment(depId,true);
+        }
+        return Result.buildSuccess();
+    }
 }
