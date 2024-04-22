@@ -67,7 +67,7 @@ public class ActivitiSerciveImpl implements ActivitiSercive {
         for (ProcessInstance processInstance : list) {
             if (processInstance.isSuspended() && activate.equals(WFOperationConst.ACTIVATE)){
                 runtimeService.activateProcessInstanceById(processInstance.getId());
-            }else if (processInstance.isSuspended() && activate.equals(WFOperationConst.SUSPEND)){
+            }else if (!processInstance.isSuspended() && activate.equals(WFOperationConst.SUSPEND)){
                 runtimeService.suspendProcessInstanceById(processInstance.getId());
             }
         }

@@ -175,14 +175,14 @@ public class ActivitiController {
 
     @Operation(summary ="激活某个流程实例")
     @GetMapping("activateProcessInstance")
-    public Result activateSingleProcessInstance(@RequestParam("ProInsId") String proInsId){
+    public Result activateSingleProcessInstance(@RequestParam("proInsId") String proInsId){
         activitiSercive.actOrSusProcessInstance(proInsId,WFOperationConst.ACTIVATE);
         return Result.buildSuccess();
     }
 
     @Operation(summary ="挂起某个流程实例")
     @GetMapping("suspendProcessInstance")
-    public Result suspendSingleProcessInstance(@RequestParam("ProProInsIdDefKey") String proInsId){
+    public Result suspendSingleProcessInstance(@RequestParam("proInsId") String proInsId){
         activitiSercive.actOrSusProcessInstance(proInsId,WFOperationConst.SUSPEND);
         return Result.buildSuccess();
     }
@@ -261,6 +261,43 @@ public class ActivitiController {
         }else {
             repositoryService.deleteDeployment(depId,true);
         }
+        return Result.buildSuccess();
+    }
+
+
+
+    @Operation(summary ="查询任务")
+    @GetMapping("/getTask")
+    public Result getTask(@RequestParam("username") String username){
+        List<Task> list = taskService.createTaskQuery().taskCandidateUser(username).list();
+        return Result.buildSuccess(list.toString());
+    }
+
+    @Operation(summary ="拾取任务")
+    @GetMapping("/claimTask")
+    public Result getTask(@RequestParam("username") String username,@RequestParam("taskId") String taskId){
+        taskService.claim(taskId,username);
+        return Result.buildSuccess();
+    }
+
+    @Operation(summary ="转交任务")
+    @GetMapping("/trans")
+    public Result transTask(@RequestParam("username") String username,@RequestParam("taskId") String taskId){
+        taskService.setAssignee(taskId,username);
+        return Result.buildSuccess();
+    }
+
+    @Operation(summary ="删除候选人")
+    @GetMapping("/deleteCandidateUser")
+    public Result deleteCandidateUser(@RequestParam("username") String username,@RequestParam("taskId") String taskId){
+        taskService.deleteCandidateUser(taskId,username);
+        return Result.buildSuccess();
+    }
+
+    @Operation(summary ="添加候选人")
+    @GetMapping("/addCandidateUser")
+    public Result addCandidateUser(@RequestParam("username") String username,@RequestParam("taskId") String taskId){
+        taskService.addCandidateUser(taskId,username);
         return Result.buildSuccess();
     }
 }

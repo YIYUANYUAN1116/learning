@@ -29,6 +29,10 @@ public class SecurityConfig {
                 {"1", "password", "ROLE_ACTIVITI_USER", "GROUP_otherTeam"},
                 {"2", "password", "ROLE_ACTIVITI_USER"},
                 {"3", "password", "ROLE_ACTIVITI_ADMIN"},
+                {"张三", "password", "ROLE_ACTIVITI_ADMIN"},
+                {"李四", "password", "ROLE_ACTIVITI_ADMIN"},
+                {"王五", "password", "ROLE_ACTIVITI_ADMIN"},
+                {"王二麻", "password", "ROLE_ACTIVITI_ADMIN"},
         };
 
         for (String[] user : usersGroupsAndRoles) {
