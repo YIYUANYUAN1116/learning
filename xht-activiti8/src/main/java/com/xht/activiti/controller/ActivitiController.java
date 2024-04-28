@@ -17,6 +17,7 @@ import org.activiti.engine.history.HistoricActivityInstance;
 import org.activiti.engine.history.HistoricProcessInstance;
 import org.activiti.engine.history.HistoricProcessInstanceQuery;
 import org.activiti.engine.history.HistoricTaskInstance;
+import org.activiti.engine.impl.identity.Authentication;
 import org.activiti.engine.impl.interceptor.CommandContext;
 import org.activiti.engine.impl.persistence.entity.ExecutionEntity;
 import org.activiti.engine.impl.persistence.entity.ExecutionEntityManager;
@@ -96,6 +97,7 @@ public class ActivitiController {
         HashMap<String, Object> stringObjectHashMap = new HashMap<>();
         stringObjectHashMap.put("ceo","我是ceo");
         stringObjectHashMap.put("hr","我是hr");
+        Authentication.setAuthenticatedUserId(String.valueOf(123));
         ProcessInstance processInstance = runtimeService.startProcessInstanceById(processDefinitionId, stringObjectHashMap);
         return Result.buildSuccess(processInstance.toString());
     }
@@ -299,5 +301,13 @@ public class ActivitiController {
     public Result addCandidateUser(@RequestParam("username") String username,@RequestParam("taskId") String taskId){
         taskService.addCandidateUser(taskId,username);
         return Result.buildSuccess();
+    }
+
+
+    @Operation(summary ="查询我的申请")
+    @GetMapping("/findMyApply")
+    public Result findMyApply(@RequestParam("userId") String userId){
+        List<HistoricProcessInstance> list = historyService.createHistoricProcessInstanceQuery().startedBy(userId).list();
+        return Result.buildSuccess(list.toString());
     }
 }
