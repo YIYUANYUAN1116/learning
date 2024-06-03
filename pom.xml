@@ -26,6 +26,7 @@
         <module>xht-ai</module>
         <module>xht-websocket</module>
         <module>xht-activiti8</module>
+        <module>xht-filetrans</module>
     </modules>
 
     <properties>

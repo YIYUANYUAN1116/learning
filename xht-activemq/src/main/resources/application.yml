@@ -1,0 +1,8 @@
+spring:
+  activemq:
+    broker-url: tcp://localhost:61616
+    user: admin
+    password: admin
+  #默认情况下，activemq使用的是queue模式，如果要使用topic模式，必须设置为true
+  jms:
+    pub-sub-domain: true
