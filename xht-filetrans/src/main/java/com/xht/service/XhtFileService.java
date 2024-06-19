@@ -16,4 +16,5 @@ public interface XhtFileService {
     //模板创建docx
     ResponseEntity<byte[]> createDocx(CreateDocxParam createDocxParam);
 
+    String htmlToWord();
 }

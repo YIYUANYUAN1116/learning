@@ -8,10 +8,7 @@ import com.xht.service.XhtFileService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/file")
@@ -34,5 +31,10 @@ public class XhtFileController {
     @PostMapping("/createDocx")
     public ResponseEntity<byte[]> createDocx(@RequestBody CreateDocxParam createDocxParam){
         return  xhtFileService.createDocx(createDocxParam);
+    }
+
+    @GetMapping("/htmlToWord")
+    public String htmlToWord(){
+        return  xhtFileService.htmlToWord();
     }
 }

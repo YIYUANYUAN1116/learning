@@ -27,6 +27,7 @@
         <module>xht-websocket</module>
         <module>xht-activiti8</module>
         <module>xht-filetrans</module>
+        <module>xht-okta</module>
     </modules>
 
     <properties>

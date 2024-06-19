@@ -1,0 +1,36 @@
+server:
+  port: 8101
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/learning?characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: yzd2021
+
+#  security:
+#    oauth2:
+#      # OAuth2 客户端配置
+#      client:
+#        # 基础属性前缀
+#        registration:
+#          # OAuth2服务提供商标识符（由当前项目定义）
+#          okta:
+#            client-id: 0oaht5gpb7EwQU3D95d7
+#            client-secret: rOD3xUwhHM4Agw8Rl7LMmBaRvfflWvJCEL10dKAU8dKwKeAxmFPmWGiPm-tOJDJ8
+#            client-name: oss
+#            redirect-uri: https://dev-92748479.okta.com/oauth2/default
+#        provider:
+#          okta:
+#            authorization-uri: https://dev-92748479.okta.com/oauth2/default/v1/authorize
+#            token-uri: https://dev-92748479.okta.com/oauth2/default/v1/token
+#            user-info-uri: https://dev-92748479.okta.com/oauth2/default/v1/userinfo
+#            jwk-set-uri: https://dev-92748479.okta.com/oauth2/default/v1/keys
+#            issuer-uri: https://dev-92748479.okta.com/oauth2/default
+
+
+okta:
+  oauth2:
+    client-id: 0oaht5gpb7EwQU3D95d7
+    client-secret: rOD3xUwhHM4Agw8Rl7LMmBaRvfflWvJCEL10dKAU8dKwKeAxmFPmWGiPm-tOJDJ8
+    issuer: https://dev-92748479.okta.com/oauth2/default
+    redirect-uri: /authorization-code/callback
