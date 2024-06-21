@@ -6,6 +6,8 @@ spring:
     url: jdbc:mysql://localhost:3306/learning?characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true
     username: root
     password: yzd2021
+  thymeleaf:
+    cache: false
 
 #  security:
 #    oauth2:

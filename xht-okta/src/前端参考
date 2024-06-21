@@ -1,0 +1,23 @@
+ <Button type="link" onClick={async () => {
+          // const res = await OktaLogin()
+          // window.open('http://localhost:8101/oauth2/authorization/okta', 'newwindow', 'height=500, width=500, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=n o, status=no')
+
+          window.open('http://localhost:8101/oauth2/authorization/okta');
+          window?.addEventListener('message', async (e) => {
+            console.log("message", e);
+            if (e.data) {
+              const defaultLoginSuccessMessage = intl.formatMessage({
+                id: 'pages.login.success',
+                defaultMessage: '登录成功！',
+              });
+              message.destroy();
+              message.success(defaultLoginSuccessMessage);
+              setToken(e.data);
+              await fetchUserInfo();
+              history.push('/');
+            }
+          }, false);
+        }
+        }>
+          <FormattedMessage id="pages.login.loginWithOKTA" defaultMessage="OKTA登录" />
+</Button>
