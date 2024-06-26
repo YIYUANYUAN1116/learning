@@ -28,6 +28,7 @@
         <module>xht-activiti8</module>
         <module>xht-filetrans</module>
         <module>xht-okta</module>
+        <module>xht-ggzhibo</module>
     </modules>
 
     <properties>

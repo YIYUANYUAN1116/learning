@@ -34,7 +34,6 @@ public class SecurityConfig {
 
         });
 
-
         httpSecurity.formLogin(httpSecurityFormLoginConfigurer -> {
             httpSecurityFormLoginConfigurer.loginPage("/login.html")
                     .loginProcessingUrl("/mylogin");
