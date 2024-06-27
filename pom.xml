@@ -29,6 +29,7 @@
         <module>xht-filetrans</module>
         <module>xht-okta</module>
         <module>xht-ggzhibo</module>
+        <module>xht-pay</module>
     </modules>
 
     <properties>

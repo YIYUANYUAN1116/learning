@@ -6,8 +6,8 @@
 	<groupId>com.xht.redis</groupId>
 	<artifactId>xht-redis</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>hxt-redis</name>
-	<description>hxt-redis</description>
+	<name>xht-redis</name>
+	<description>xht-redis</description>
 
 	<parent>
 		<groupId>com.xht.learning</groupId>
