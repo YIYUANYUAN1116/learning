@@ -10,16 +10,14 @@ import com.alipay.api.request.AlipayTradePagePayRequest;
 import com.alipay.api.request.AlipayTradeRefundRequest;
 import com.alipay.easysdk.factory.Factory;
 import com.xht.pay.entity.AliPay;
+import com.xht.pay.entity.JobId;
 import com.xht.pay.properties.AliPayProperties;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -120,4 +118,8 @@ public class PayController {
         log.info(body);
     }
 
+    @PostMapping("/etl/callback")
+    public void test(@RequestBody JobId jobId){
+        log.info(jobId.toString());
+    }
 }

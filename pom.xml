@@ -30,6 +30,7 @@
         <module>xht-okta</module>
         <module>xht-ggzhibo</module>
         <module>xht-pay</module>
+        <module>xht-algorithm</module>
     </modules>
 
     <properties>
