@@ -16,13 +16,16 @@ public class LC11 {
         int left = 0,maxArea = 0;
         int right = height.length-1;
         while (left < right){
-//            maxArea = Math.max(maxArea, (right - left) * Math.min(height[left],height[right]));
-//            if (height[left] < height[right]){
-//                left++;
-//            }else {
-//                right--;
-//            }
             maxArea = Math.max(maxArea,height[left]<height[right]?(right - left)*height[left++]:(right - left)*height[right--]);
+        }
+    }
+
+    public void LC11Method2(int[] height){
+        int left = 0;
+        int right = height.length-1;
+        int maxArea = 0;
+        while (left < right){
+            maxArea = Math.max(maxArea,height[left]<height[right]?height[left]*(right - left++):height[right]*(right-- - left));
         }
     }
 }
