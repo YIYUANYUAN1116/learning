@@ -3,4 +3,9 @@ server:
 
 spring:
   elasticsearch:
-    uris: 192.168.213.134:9200
+    uris: 192.168.213.139:9200
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: yzd2021
+    url: 192.168.213.139:3306
