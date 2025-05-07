@@ -26,4 +26,13 @@ public class LC230 {
         if (--k == 0) res = root.val;
         dfs(root.right);
     }
+
+
+    private void dfs2(TreeNode root){
+        if (root == null)return;
+        dfs(root.left);
+        if (k == 0) return;
+        if (--k == 0)res = root.val;
+        dfs(root.right);
+    }
 }

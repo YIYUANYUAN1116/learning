@@ -1,5 +1,6 @@
 package com.xht.algorithm.LC100;
 
+import com.xht.algorithm.common.ListNode;
 import com.xht.algorithm.common.Node;
 
 import java.util.HashMap;
@@ -27,6 +28,20 @@ public class LC138 {
             node.random = copyRandomList(head.random);
 
         }
+
+        return cachedNode.get(head);
+    }
+
+    public static Node copyRandomList2(Node head) {
+        if (head == null) return null;
+
+        if (!cachedNode.containsKey(head)){
+            Node listNode = new Node(head.val);
+            cachedNode.put(head,listNode);
+            listNode.next = copyRandomList2(head.next);
+            listNode.random = copyRandomList2(head.random);
+        }
+
 
         return cachedNode.get(head);
     }
