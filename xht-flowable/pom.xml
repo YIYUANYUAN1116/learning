@@ -9,8 +9,8 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.xht.activiti8</groupId>
-    <artifactId>xht-activiti8</artifactId>
+    <groupId>com.xht.flowable</groupId>
+    <artifactId>xht-flowable</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -20,25 +20,27 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.flowable/flowable-spring-boot-starter -->
+        <dependency>
+            <groupId>org.flowable</groupId>
+            <artifactId>flowable-spring-boot-starter</artifactId>
+            <version>7.1.0</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.xht.common</groupId>
             <artifactId>xht-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
-
-<!--        &lt;!&ndash;整合activiti&ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.activiti</groupId>-->
-<!--            <artifactId>activiti-spring-boot-starter</artifactId>-->
-<!--            <version>8.1.0</version>-->
-<!--        </dependency>-->
-
     </dependencies>
-
-    <repositories>
-        <repository>
-            <id>activiti-releases</id>
-            <url>https://artifacts.alfresco.com/nexus/content/repositories/activiti-releases</url>
-        </repository>
-    </repositories>
 
 </project>
