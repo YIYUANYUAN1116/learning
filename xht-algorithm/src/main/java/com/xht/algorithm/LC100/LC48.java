@@ -11,6 +11,35 @@ public class LC48 {
 
     }
 
+
+    public void rotate4(int[][] matrix) {
+        int len = matrix.length;
+        for (int i = 0; i < len; i++) {
+            for (int j = 0; j < len; j++) {
+                int tmp = matrix[i][j];
+                matrix[i][j] = matrix[len-j -1][i];
+                matrix[len-j -1][i] = matrix[len-i-1][len-j-1];
+                matrix[len-i-1][len-j-1] = matrix[j][len-i-1];
+                matrix[j][len - 1- i] = tmp;
+            }
+        }
+    }
+
+    public void rotate3(int[][] matrix) {
+        int len = matrix.length;
+        int[][] temp = new int[len][len];
+        for (int i = 0; i < len; i++) {
+            temp[i] = matrix[i].clone();
+        }
+        for (int i = 0; i < len; i++) {
+            for (int j = 0; j < len; j++) {
+                matrix[j][len - i - 1] = temp[i][j];
+            }
+        }
+    }
+
+
+
     /**
      * 第i行  变成  len-1-i 列
      * 第j列  变成  第j行

@@ -36,3 +36,4 @@
 # [service-product](xht-spring-cloud%2Fservice%2Fservice-product) 8105
 
 # [xht-flowable](xht-flowable) 8106
+# [xht-dynamic-datasource](xht-dynamic-datasource) 8107

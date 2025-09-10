@@ -33,6 +33,7 @@
         <module>xht-algorithm</module>
         <module>xht-juc</module>
         <module>xht-flowable</module>
+        <module>xht-dynamic-datasource</module>
     </modules>
 
     <properties>

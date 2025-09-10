@@ -14,21 +14,42 @@ public class LC54 {
 
     }
 
-    public List<Integer> spiralOrder(int[][] matrix) {
-        int r = matrix.length - 1;
-        int b = matrix[0].length - 1;
+
+    public List<Integer> spiralOrder2(int[][] matrix) {
+        int r = matrix[0].length - 1;
+        int b = matrix.length - 1;
         int t = 0;
         int l = 0;
         List<Integer> res = new ArrayList<>();
-        while (true){
-            for (int i = l; i <= r; i++)res.add(matrix[t][i]);
-            if (++t > b)break;
-            for (int i = t; i <= b; i++)res.add(matrix[i][r]);
-            if (--r < l)break;
-            for (int i = r; i >= l; i--)res.add(matrix[b][i]);
-            if (--b < t)break;
-            for (int i = b; i >= t; i--)res.add(matrix[i][l]);
-            if (++l > r)break;
+        while (true) {
+            for (int i = l; i <= r; i++) res.add(matrix[t][i]);
+            if (++t > b) break;
+            for (int i = t; i <= b; i++) res.add(matrix[i][r]);
+            if (--r < l) break;
+            for (int i = r; i >= l; i--) res.add(matrix[b][i]);
+            if (--b < t) break;
+            for (int i = b; i >= t; i--) res.add(matrix[i][l]);
+            if (++l > r) break;
+        }
+        return res;
+    }
+
+
+    public List<Integer> spiralOrder(int[][] matrix) {
+        int r = matrix[0].length - 1;
+        int b = matrix.length - 1;
+        int t = 0;
+        int l = 0;
+        List<Integer> res = new ArrayList<>();
+        while (true) {
+            for (int i = l; i <= r; i++) res.add(matrix[t][i]);
+            if (++t > b) break;
+            for (int i = t; i <= b; i++) res.add(matrix[i][r]);
+            if (--r < l) break;
+            for (int i = r; i >= l; i--) res.add(matrix[b][i]);
+            if (--b < t) break;
+            for (int i = b; i >= t; i--) res.add(matrix[i][l]);
+            if (++l > r) break;
         }
         return res;
 
