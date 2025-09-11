@@ -11,6 +11,21 @@ public class LC121 {
         int[] prices = {7,1,5,3,6,4};
         System.out.println(maxProfit(prices));
     }
+
+
+    public static int maxProfit2(int[] prices) {
+        int res = 0;
+        int minIndex = 0;
+        for (int i = 1; i < prices.length; i++) {
+            if (prices[i] < prices[minIndex]) {
+                minIndex = i;
+            }else {
+                res =  Math.max(res, prices[i] - prices[minIndex]);
+            }
+        }
+        return res;
+    }
+
     public static int maxProfit(int[] prices) {
         int res = 0;
         int minIndex = 0;

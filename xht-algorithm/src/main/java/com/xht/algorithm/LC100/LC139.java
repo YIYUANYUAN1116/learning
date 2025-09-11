@@ -44,12 +44,10 @@ public class LC139 {
 
 
     public static boolean wordBreak2(String s, List<String> wordDict) {
-        Set<String> set = new HashSet<>(wordDict);
-
         boolean[] dp = new boolean[s.length() + 1];
-        int length = s.length();
         dp[0] = true;
-        for (int i = 1; i < length; i++) {
+        Set<String> set = new HashSet<>(wordDict);
+        for (int i = 1; i < s.length(); i++) {
             for (int j = 0; j < i; j++) {
                 if (dp[j] && set.contains(s.substring(j,i))){
                     dp[i] = true;
@@ -57,6 +55,6 @@ public class LC139 {
                 }
             }
         }
-        return dp[length];
+        return dp[s.length()];
     }
 }
