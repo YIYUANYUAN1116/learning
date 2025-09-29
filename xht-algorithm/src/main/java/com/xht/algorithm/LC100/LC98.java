@@ -23,4 +23,10 @@ public class LC98 {
 
         return dfs(root.left,lower,root.val) && dfs(root.right,root.val,upper);
     }
+
+    public boolean dfs2(TreeNode root,Integer lower,Integer upper){
+        if (root == null) return true;
+        if (root.val <= lower || root.val>=upper)return false;
+        return dfs2(root.left,lower,root.val) && dfs2(root.right,root.val,upper);
+    }
 }

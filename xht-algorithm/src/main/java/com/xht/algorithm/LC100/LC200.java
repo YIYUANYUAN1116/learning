@@ -25,7 +25,7 @@ public class LC200 {
     }
 
     public void dfs(int i,int j,char[][] grid){
-        if (i<0 || j <0 || i>grid.length-1 || j>grid[i].length-1)return;
+        if (i<0 || i>grid.length-1 || j<0 || j>grid[i].length-1 || grid[i][j] == '0') return;
         grid[i][j] = '0';
         dfs(i-1,j,grid);
         dfs(i+1,j,grid);

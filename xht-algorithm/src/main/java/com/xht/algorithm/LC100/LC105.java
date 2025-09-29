@@ -17,6 +17,13 @@ public class LC105 {
     }
 
     private Map<Integer,Integer> indexMap = new HashMap<>();
+
+    /**
+     * preorder = [3,9,20,15,7], inorder = [9,3,15,20,7]
+     * @param preorder
+     * @param inorder
+     * @return
+     */
     public TreeNode buildTree(int[] preorder, int[] inorder) {
         for (int i = 0; i < inorder.length; i++) {
             indexMap.put(inorder[i],i);
@@ -25,7 +32,7 @@ public class LC105 {
     }
 
     public TreeNode myBuildTree(int[] preorder, int[] inorder,int pl,int pr,int il,int ir) {
-        if (pl > il)return null;
+        if (pl > pr)return null;
 
         int rootVal = preorder[pl];
         TreeNode root = new TreeNode(rootVal);

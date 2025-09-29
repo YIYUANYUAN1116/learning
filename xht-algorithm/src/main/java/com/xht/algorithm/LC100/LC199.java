@@ -32,4 +32,13 @@ public class LC199 {
         dfs(root.right,deep+1);
         dfs(root.left,deep+1);
     }
+
+    private void dfs2(TreeNode root,int deep){
+        if (root == null) return;
+        if (res.size() == deep){
+            res.add(root.val);
+        }
+        dfs2(root.right,deep+1);
+        dfs2(root.left,deep+1);
+    }
 }
